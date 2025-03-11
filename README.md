@@ -9,7 +9,7 @@ This is my repo for STATS 220.
 - I am interested in learning about data scraping and R programming language 
 
 A food that I would eat for a lifetime: 
-![meme]([https://tenor.com/view/cajun-chicken-alfredo-pasta-food-chicken-alfredo-gif-1327376187094577166)
+![meme](https://tenor.com/view/cajun-chicken-alfredo-pasta-food-chicken-alfredo-gif-1327376187094577166)
 
 
-A meme that captures how I currently feel about my university studies is ![meme]([https://c.tenor.com/8druEACXtX8AAAAd/tenor.gif](https://tenor.com/view/science-math-analytics-technology-nick-zetta-gif-16436026)
+A meme that captures how I currently feel about my university studies is ![meme](https://tenor.com/view/science-math-analytics-technology-nick-zetta-gif-16436026)
