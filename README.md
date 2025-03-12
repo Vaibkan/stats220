@@ -7,7 +7,7 @@
 - I am interested in learning about data scraping and the R programming language 
 
 A food that I would eat for a lifetime:  
-![](https://tenor.com/view/cajun-chicken-alfredo-pasta-food-chicken-alfredo-gif-1327376187094577166)
+![cajun-chicken-alfredo-pasta](https://github.com/user-attachments/assets/d428fccd-1c75-44aa-8dac-70eef7f9e083)
 
 A meme that captures how I currently feel about my university studies:  
-![](https://tenor.com/view/science-math-analytics-technology-nick-zetta-gif-16436026)
+![science-math](https://github.com/user-attachments/assets/9b38ce48-c12f-4985-9be3-d847f53f6f8e)
