@@ -1,0 +1,128 @@
+
+  
+```{r setup, include=FALSE}
+  knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+  #1) Types of clothing chosen
+  
+  library(tidyverse)
+  fashion <- read.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRbd8HwYAMsIZKPyNPEYSOScOXZhUJQu1_6nVh3Lkqlz2uTzOvHME-Hq6dOp1rTN-5DCOFJzapNg8Fa/pub?output=csv")
+  
+  fashion_counts <- fashion %>% count(What.type.of.clothing.do.you.notice.other.people.wearing.on.a.daily.basis.)
+  
+  ggplot(fashion_counts, aes(x = What.type.of.clothing.do.you.notice.other.people.wearing.on.a.daily.basis., y = n, fill = What.type.of.clothing.do.you.notice.other.people.wearing.on.a.daily.basis.)) +
+    geom_bar(stat = "identity") +
+    theme_minimal() +
+    labs(title = "Clothing Types Observed Daily", x = "Clothing Type", y = "frequency of clothing") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+  
+  
+  #2) Time taken for choosing clothes 
+  time_taken <- fashion %>% count(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..)
+  
+  # Create the bar chart
+  ggplot(time_taken, aes(x = as.factor(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..), 
+                         y = n, 
+                         fill = as.factor(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..))) +
+    geom_bar(stat = "identity") +
+    theme_minimal() +
+    labs(title = "Time Spent Choosing Clothes", 
+         x = "Time (minutes)", 
+         y = "Frequency") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  #3) most common reason for dress choice
+  common_dress_choice <- fashion %>% 
+    count(Whats.the.main.reason.for.your.dress.choice.) %>% 
+    filter(n == max(n)) %>% 
+    pull(Whats.the.main.reason.for.your.dress.choice.)
+  
+  #4) least common footwear prefer to be worn
+  least_common_footwear <- fashion %>%
+    count(What.type.of.footwear.do.you.wear.on.a.daily.basis.) %>%
+    filter(n == min(n)) %>%
+    slice(1) %>%  
+    pull(What.type.of.footwear.do.you.wear.on.a.daily.basis.)
+  
+  #5) Average time it takes for people to put their dress on
+average <- fashion %>%
+    pull(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..) %>%
+    mean() %>%
+    round()
+```
+  
+```{css}
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 20px;
+    padding: 20px;
+    background-color: #E8D9CD;
+  }
+  h1 {
+    color: brown ;
+    border-bottom: 3px solid #0073e6;
+    padding-bottom: 10px;
+    
+  }
+  
+  h2{
+    color: #868859
+  }
+```
+  
+## Overview
+  
+In this data report, we will be exploring different fashion trends/ preferences that have collected through a survey using google forms. Some questions asked were related to clothing/ footwear choices, time taken to choose clothes, reasoning for dress choice and accessories that people prefer wearing on a daily basis. The data collected for this report comes from a mix of random sampling.
+  
+google forms link: [![fashion trends](https://docs.google.com/forms/d/e/1FAIpQLScJg89-63tieYx1KbIuPnhtMBLabarufarIL9KC55PB7NZjqQ/viewform?usp=dialog)](https://docs.google.com/forms/d/e/1FAIpQLScJg89-63tieYx1KbIuPnhtMBLabarufarIL9KC55PB7NZjqQ/viewform?usp=dialog)
+  
+## Key Statistics:
+
+## Common dress choice
+Most common dress choice the most is common dress preference is `r common_dress_choice`. This can be a useful indication of what fashion trends are currently popular.
+  
+## Least preffered footwear choice 
+The least preferred footwear choice are `r least_common_footwear`, which shows that recipients prefer wearing sneakers more compared to other footwear.
+  
+## Average time taken to put the dress on 
+The average time for people to put on their clothes from the survey was `r average` minutes. This data may serve as an indication on how much time people are actually willing to invest in fashion.
+  
+## Bar charts
+  
+
+```{r fashion_barchart, echo=FALSE}
+ggplot(fashion_counts, aes(x = What.type.of.clothing.do.you.notice.other.people.wearing.on.a.daily.basis., 
+                           y = n, 
+                           fill = What.type.of.clothing.do.you.notice.other.people.wearing.on.a.daily.basis.)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Clothing Types Observed Daily", 
+       x = "Clothing Type", 
+       y = "Frequency") +
+  scale_fill_manual(name = "Clothing Type", values = c("red", "blue", "green", "yellow")) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+  
+This barchart represents the frequency of each clothing type that people prefer to wear. A straightforward yet insightful observation would be that people tend to prefer streetwear contrasting to formal wear or old money.
+  
+```{r time_spent_barchart, echo=FALSE}
+
+n_categories <- length(unique(time_taken$How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..))
+
+colors <- RColorBrewer::brewer.pal(n_categories, "Set3")
+
+ggplot(time_taken, aes(x = as.factor(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..), 
+                       y = n, 
+                       fill = as.factor(How.long.do.you.spend.on.average.choosing.your.clothes.on.a.daily.basis..in.minutes..))) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Time Spent Choosing Clothes", 
+       x = "Time (minutes)", 
+       y = "Frequency") +
+  scale_fill_manual(name = "Time Range (minutes)", values = colors) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+  
+In this barchart the minutes are displayed in the x axis and compared against the frequency of people choosing the clothes displayed in the y axis. It is interesting to see that most people tend to only spend two minutes in selecting their clothes contrasting to twenty minutes. This shows that people take quick decisions when it comes to choosing their daily outfits
